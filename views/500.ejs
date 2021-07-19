@@ -1,0 +1,54 @@
+<!-- Head Script -->
+<%- include('./includes/head.ejs') %>
+</head>
+
+<body data-spy="scroll" data-target="#main-nav" id="home">
+  <!-- START HERE -->
+  <!-- Navigation -->
+  <%- include('./includes/error-nav.ejs', {csrf : csrf}) %>
+  <!-- Home Section -->
+  <header id="home-section" class="my-5 text-center">
+        <div class="dark-overlay">
+          <div class="home-inner container ">
+          <div class="row ">
+              <div class="col offset-md-1 ">
+                  <h5 class="display-2 text-center">An error occured. Please try again later.</h5>
+              </div>
+          </div>
+        
+      </div>
+    </div>
+  </header>
+
+  
+
+  <script>
+    // Get the current year for the copyright
+    $('#year').text(new Date().getFullYear());
+
+    // Init scrollspy
+    $('body').scrollspy({
+      target: '#main-nav'
+    });
+    $('#main-nav a').on('click', function (e) {
+      // Check for a hash value
+      if (this.hash !== '') {
+        // Prevent default behavior
+        e.preventDefault();
+
+        // Store hash
+        const hash = this.hash;
+
+        // Animate smooth scroll
+        $('html, body').animate({
+          scrollTop: $(hash).offset().top
+        }, 900, function () {
+          // Add hash to URL after scroll
+          window.location.hash = hash;
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

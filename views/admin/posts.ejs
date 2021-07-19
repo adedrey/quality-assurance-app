@@ -1,0 +1,129 @@
+<%- include('../includes/admin/head.ejs') %>
+</head>
+
+<body>
+
+  <%- include('../includes/admin/nav.ejs') %>
+  <!-- HEADER -->
+  <header id="main-header" class="py-2 bg-primary text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h1>
+            <i class="fas fa-pencil-alt"></i> Reports</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SEARCH -->
+  <section id="search" class="py-4 mb-4 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 ml-auto">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search Posts...">
+            <div class="input-group-append">
+              <button class="btn btn-primary">Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POSTS -->
+  <section id="posts">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-header">
+              <h4>Latest Reports</h4>
+            </div>
+            <% if(reports.length > 0 ){ %>
+            <table class="table table-striped">
+              <thead class="thead-dark">
+
+                <tr>
+                  <th>Name</th>
+                  <th>Department</th>
+                  <th>Level</th>
+                  <th>Subject</th>
+                  <th>Date</th>
+                  <th>Print Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% reports.forEach(report => { %>
+                <tr>
+                  <td><%= report.name %></td>
+                  <td><%= report.department %></td>
+                  <td><%= report.level %></td>
+                  <td><%= report.subject %></td>
+                  <td><%= report.date %></td>
+                  <td><a href="/admin/report/<%= report._id %>" class="btn btn-secondary">
+                      <i class="fas fa-angle-double-right"></i> Print
+                    </a>
+                  </td>
+                </tr>
+
+                <% }); %>
+
+              </tbody>
+            </table>
+
+            <!-- PAGINATION -->
+            <nav class="ml-4 ">
+              <ul class="pagination justify-content-center">
+                <li class="page-item  <%= (hasPreviousPage)? '' : 'disabled' %>">
+                  <a href="/admin?page=<%= previousPage %>" class="page-link">Prev</a>
+                </li>
+                <% if(currentPage !== 1 && previousPage !== 1){ %>
+                <li class="page-item">
+                  <a href="/admin?page=1" class="page-link">1</a>
+                </li>
+                <% } %>
+                <% if(hasPreviousPage){ %>
+                <li class="page-item">
+                  <a href="/admin?page=<%= previousPage %>" class="page-link"><%= previousPage %></a>
+                </li>
+                <% } %>
+                <li class="page-item active">
+                  <a href="/admin?page=<%= currentPage %>" class="page-link active"><%= currentPage %></a>
+                </li>
+                <% if(hasNextPage){ %>
+                <li class="page-item">
+                  <a href="/admin?page=<%= nextPage %>" class="page-link"><%= nextPage %></a>
+                </li>
+                <% } %>
+                <% if(lastPage !== currentPage && nextPage !== lastPage){ %>
+                <li class="page-item">
+                  <a href="/admin?page=<%= lastPage %>" class="page-link"><%= lastPage %></a>
+                </li>
+                <% } %>
+                <li class="page-item  <%= (hasNextPage)? '' : 'disabled' %>">
+                  <a href="/admin?page=<%= nextPage %>" class="page-link">Next</a>
+                </li>
+              </ul>
+            </nav>
+            <% } else { %>
+            <p class="text-center">No report yet...</p>
+            <% }%>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <%- include('../includes/admin/end.ejs') %>
+  <script>
+    // Get the current year for the copyright
+    $('#year').text(new Date().getFullYear());
+  </script>
+</body>
+
+</html>

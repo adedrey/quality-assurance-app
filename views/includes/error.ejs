@@ -1,0 +1,9 @@
+<% if(errorMessage){ %>
+<div
+    class="alert <%= (errorMessage == 'Password changed successfully' || errorMessage == 'Your request have been submitted successfully and currently under investigation.')? 'alert-success' : 'alert-danger'%> alert-dismissible">
+    <button class="close" type="button" data-dismiss="alert">
+        <span>&times;</span>
+    </button>
+    <%= errorMessage %>
+</div>
+<% } %>

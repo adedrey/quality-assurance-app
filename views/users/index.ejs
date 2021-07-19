@@ -1,0 +1,59 @@
+<!-- Head Script -->
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body data-spy="scroll" data-target="#main-nav" id="home">
+  <!-- START HERE -->
+  <!-- Navigation -->
+  <%- include('../includes/nav.ejs') %>
+  <!-- Home Section -->
+  <%- include('../includes/users-home.ejs') %>
+
+  <!-- Explore Head -->
+  <%- include('../includes/users-explore.ejs') %>
+  
+
+  
+  <!-- FOOTER -->
+  <%- include('../includes/footer.ejs') %>
+  
+
+  <!-- CONTACT MODAL -->
+
+  <%- include('../includes/users-request.ejs') %>
+
+
+<!-- End script -->
+<%- include('../includes/end.ejs') %>
+  
+
+  <script>
+    // Get the current year for the copyright
+    $('#year').text(new Date().getFullYear());
+
+    // Init scrollspy
+    $('body').scrollspy({
+      target: '#main-nav'
+    });
+    $('#main-nav a').on('click', function (e) {
+      // Check for a hash value
+      if (this.hash !== '') {
+        // Prevent default behavior
+        e.preventDefault();
+
+        // Store hash
+        const hash = this.hash;
+
+        // Animate smooth scroll
+        $('html, body').animate({
+          scrollTop: $(hash).offset().top
+        }, 900, function () {
+          // Add hash to URL after scroll
+          window.location.hash = hash;
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>
